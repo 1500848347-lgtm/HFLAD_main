@@ -40,7 +40,7 @@ cd HFLAD_main
 pip install -r requirements.txt
 ```
 ### 2. Data Preparation
-Create a data/ folder in the root directory and place the downloaded target datasets (e.g., SWaT, MSL) inside. (We recommend downloading the required open-source datasets via cloud drives like Google Drive).
+Create a data/ folder in the root directory and place the downloaded target datasets (e.g., SWaT, MSL) inside. (We recommend downloading the required open-source datasets via cloud drives like [Google Drive}(https://drive.google.com/file/d/1mhFS3kQZhfLuU41ldv3ST12-_s126dHb/view?usp=sharing)).
 
 Scripts related to data cleaning and preprocessing are located in the data_processed/ directory. Run the corresponding scripts to perform feature engineering and format conversion on the raw data in the data/ directory.
 
