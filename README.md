@@ -16,7 +16,7 @@ The repository is organized as follows for easy reproduction and further develop
 
 ```text
 HFLAD_main/
-├── data/               # Directory for raw target datasets (e.g., SWaT, MSL, KDD-Cup99, ASD)
+├── data/               # Directory for raw target datasets (e.g., SWaT, WESAD, KDD-Cup99, ASD)
 ├── data_processed/     # Scripts for data preprocessing and the processed data
 ├── models/             # Core HFLAD model definitions (Time Encoder, Feature Encoder, HVAE)
 ├── main_and_evaluate/  # Scripts for model evaluation and testing
