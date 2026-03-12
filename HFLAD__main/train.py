@@ -63,7 +63,7 @@ def train_hflad(train_loader, train_x_raw, test_norm_bg, input_dim, hidden_dim, 
                     outputs,
                     kl_weight=kl_w,
                     feature_weights=f_weights,
-                    error_type=error_type  # <--- 关键参数接力
+                    error_type=error_type
                 )
 
             if torch.isnan(loss) or loss.item() > 1e10:
