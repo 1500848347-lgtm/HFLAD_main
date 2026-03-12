@@ -1,10 +1,9 @@
-
 import torch
 import numpy as np
 import os
 from HFLAD__main.train import train_hflad
 from HFLAD__main.utils.data_utils import get_dataloader
-from HFLAD__main.main_and_evaluate.evaluate import HFLADEvaluator, Point_Adjustment
+from HFLAD__main.main_and_evaluate.evaluate import HFLADEvaluator, Point_Adjustment, EVAL_CONFIGS
 from sklearn.metrics import precision_recall_fscore_support, roc_auc_score
 
 
@@ -32,6 +31,7 @@ def run_full_hflad_pipeline(train_norm, test_norm_bg, test_norm, test_labels, co
     train_loader = get_dataloader(train_norm, config['batch_size'], shuffle=True, window_size=current_ws,
                                   step=config['step'])
     test_loader = get_dataloader(test_norm, config['batch_size'], shuffle=False, window_size=current_ws, step=1)
+
     model = train_hflad(
         train_loader, train_norm, test_norm_bg,
         config['input_dim'], config['hidden_dim'],
@@ -45,6 +45,7 @@ def run_full_hflad_pipeline(train_norm, test_norm_bg, test_norm, test_labels, co
     torch.save(model.state_dict(), save_path)
     print(f"\n[!] 权重已落盘: {os.path.abspath(save_path)}")
     torch.cuda.empty_cache()
+
     try:
         evaluator = HFLADEvaluator(model, device)
         scores = evaluator.get_anomaly_scores(
@@ -57,14 +58,25 @@ def run_full_hflad_pipeline(train_norm, test_norm_bg, test_norm, test_labels, co
         gt_labels = test_labels[current_ws - 1:]
         min_len = min(len(scores), len(gt_labels))
         scores, gt_labels = scores[:min_len], gt_labels[:min_len]
-        best_lambda, raw_f1 = evaluator.find_best_threshold(scores, gt_labels)
+
+        eval_cfg = EVAL_CONFIGS.get(dataset, EVAL_CONFIGS['DEFAULT'])
+
+
+        best_lambda, raw_f1 = evaluator.find_best_threshold(
+            scores, gt_labels,
+            step=eval_cfg['step'],
+            beta=eval_cfg['beta']
+        )
+
         raw_preds = (scores > best_lambda).astype(int)
         p_raw, r_raw, f1_raw, _ = precision_recall_fscore_support(gt_labels, raw_preds, average='binary',
                                                                   zero_division=0)
-        pa_preds = Point_Adjustment().point_adjustment(raw_preds, gt_labels)
+        pa_preds = Point_Adjustment().point_adjustment(
+            raw_preds, gt_labels,
+            pa_window=eval_cfg['pa_window']
+        )
         p_pa, r_pa, f1_pa, _ = precision_recall_fscore_support(gt_labels, pa_preds, average='binary', zero_division=0)
         auc = roc_auc_score(gt_labels, scores)
-
 
         print(f" Precision-PA:  {p_pa:.4f} | Recall-PA:  {r_pa:.4f} | F1-PA:  {f1_pa:.4f}")
         print("-" * 55)
@@ -73,4 +85,5 @@ def run_full_hflad_pipeline(train_norm, test_norm_bg, test_norm, test_labels, co
 
     except Exception as e:
         print(f"\n[!] 评估阶段出错: {e}")
+
     return model
