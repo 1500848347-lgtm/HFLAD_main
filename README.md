@@ -32,11 +32,20 @@ HFLAD_main/
 ### 1. Environment Setup
 Please ensure your development environment has Python 3.8+ installed. Using a virtual environment is highly recommended:
 ```
-# Clone the repository 
-git clone [https://github.com/1500848347-lgtm/HFLAD_main.git](https://github.com/1500848347-lgtm/HFLAD_main.git)
+# Clone the repository / 克隆仓库
+git clone https://github.com/1500848347-lgtm/HFLAD_main.git
 cd HFLAD_main
 
-# Install dependencies
+# Create the virtual environment / 创建虚拟环境
+python -m venv hflad_env
+
+# Activate the environment / 激活虚拟环境
+# For Linux/macOS:
+source hflad_env/bin/activate  
+# For Windows:
+# hflad_env\Scripts\activate
+
+# Install dependencies / 安装依赖
 pip install -r requirements.txt
 ```
 ### 2. Data Preparation
