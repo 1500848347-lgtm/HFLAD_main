@@ -41,7 +41,7 @@ pip install -r requirements.txt
 ```
 ### 2. Data Preparation
 Create a data/ folder in the root directory and place the downloaded target datasets (e.g., SWaT, MSL) inside. (We recommend downloading the required open-source datasets via cloud drives like [Google Drive](https://drive.google.com/file/d/1nyIRzmkHyqcUlltj2JwCAuWw-h9V9O37/view?usp=sharing)).
-📝 Dataset Update Note: During ongoing evaluations, we identified mislabeling issues within the previously used MSL dataset, which compromised the rigor of the experimental results. To ensure the highest standards of accuracy, we have removed the MSL dataset from this repository and replaced it with the WESAD dataset. WESAD is highly compatible with the HFLAD model's architecture—particularly for consumer-centric and wearable systems—and extensive testing confirms that our model maintains state-of-the-art (SOTA) performance on this updated dataset suite.
+###📝 Dataset Update Note: During ongoing evaluations, we identified mislabeling issues within the previously used MSL dataset, which compromised the rigor of the experimental results. To ensure the highest standards of accuracy, we have removed the MSL dataset from this repository and replaced it with the WESAD dataset. WESAD is highly compatible with the HFLAD model's architecture—particularly for consumer-centric and wearable systems—and extensive testing confirms that our model maintains state-of-the-art (SOTA) performance on this updated dataset suite.
 
 Scripts related to data cleaning and preprocessing are located in the data_processed/ directory. Run the corresponding scripts to perform feature engineering and format conversion on the raw data in the data/ directory.
 
