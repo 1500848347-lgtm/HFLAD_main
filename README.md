@@ -78,4 +78,4 @@ We used 8-dimensional chest signals sampled at 10 Hz. The training set contains 
 
 
 
-The results show that HFLAD achieves the best overall performance on WESAD, demonstrating its effectiveness and generalization capability on wearable physiological multivariate time-series data.
+
