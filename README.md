@@ -65,3 +65,17 @@ After training, you can execute the run_eval script located in the main_and_eval
 ```
 python main_and_evaluate/run_eval.py
 ```
+## Supplementary WESAD Experiment
+
+We additionally conducted a supplementary experiment on the WESAD dataset to evaluate the generalization ability of HFLAD in wearable physiological time-series anomaly detection. All compared models were evaluated using the same WESAD preprocessing protocol, subject-independent split, anomaly definition, and test labels.
+
+We used 8-dimensional chest signals sampled at 10 Hz. The training set contains only Baseline data from subjects S2, S3, S4, S5, and S6. The test set contains data from subjects S16 and S17, where Baseline, Amusement, and Meditation are treated as normal states, and Stress is treated as the anomalous state.
+
+<img width="1672" height="724" alt="2 (1)" src="https://github.com/user-attachments/assets/68861cae-e977-4551-874d-3a3f22799578" />
+
+<img width="648" height="686" alt="2 (2)" src="https://github.com/user-attachments/assets/43899a96-c616-431a-ac8d-fa275292d003" />
+
+
+
+
+The results show that HFLAD achieves the best overall performance on WESAD, demonstrating its effectiveness and generalization capability on wearable physiological multivariate time-series data.
